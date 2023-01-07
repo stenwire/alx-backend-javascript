@@ -6,17 +6,17 @@ inteface Student {
 }
 
 const s1: Student {
-    firstName: string,
-    lastName: string,
-    age: number,
-    location: string
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 34,
+    location: 'Earth'
 }
 
 const s2: Student {
-    firstName: string,
-    lastName: string,
-    age: number,
-    location: string
+    firstName: 'Elon',
+    lastName: 'Musk',
+    age: 46,
+    location: 'Mars'
 }
 
 const studentsList: Student[] = [s1, s2]
