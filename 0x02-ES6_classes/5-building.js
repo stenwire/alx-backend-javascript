@@ -1,18 +1,23 @@
 export default class Building {
   constructor(sqft) {
-    this._sqft = sqft;
-
-    const proto = Object.getPrototypeOf(this);
-    const superProto = MyInterface.prototype;
-    const missing = Object.getOwnPropertyNames(superProto).find((name) => typeof superProto[name] === 'function' && !proto.hasOwnProperty(name));
-    if (missing) throw new TypeError(`${this.constructor.name} needs to implement ${missing}`);
+    this.sqft = sqft;
+    if (this.evacuationWarningMessage() === -1 && this.constructor !== Building) {
+      throw new Error('Class extending Building must override evacuationWarningMessage');
+    }
   }
 
   get sqft() { return this._sqft; }
 
-  set sqft(value) { this._sqft = value; }
+  set sqft(value) {
+    if (typeof value === 'number') {
+      this._sqft = value;
+    } else {
+      throw TypeError('sqft must be a number');
+    }
+  }
 
   evacuationWarningMessage() {
-    throw new Error('Class extending Building must override evacuationWarningMessage');
+    if (this._sqft < 0) return -1;
+    return -1;
   }
 }
